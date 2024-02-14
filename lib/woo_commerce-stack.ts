@@ -12,6 +12,18 @@ export class WooCommerceStack extends cdk.Stack {
     // Create VPC
     const vpc = new ec2.Vpc(this, 'ThreeTierAppVPC', {
       maxAzs: 2
+      subnetConfiguration: [
+    {
+      cidrMask: 24,
+      name: 'public-subnet',
+      subnetType: ec2.SubnetType.PUBLIC,
+    },
+    {
+      cidrMask: 24,
+      name: 'private-subnet',
+      subnetType: ec2.SubnetType.PRIVATE,
+    },
+  ],
     });
 
     // Create RDS database
