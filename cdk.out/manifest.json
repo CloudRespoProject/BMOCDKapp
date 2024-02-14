@@ -1,0 +1,401 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "WooCommerceStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "WooCommerceStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "WooCommerceStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "WooCommerceStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9b2f6f0155b57e0a0406fde63af415158199133aa830a1e6522f986820e42a03.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "WooCommerceStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "WooCommerceStack.assets"
+      ],
+      "metadata": {
+        "/WooCommerceStack/ThreeTierAppVPC/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCCC2AB901"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPublicSubnet1Subnet4F72BD37"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPublicSubnet1RouteTable7F407FC9"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPublicSubnet1RouteTableAssociation5427CAF9"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPublicSubnet1DefaultRoute38D45F56"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPublicSubnet1EIP920D6FB0"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPublicSubnet1NATGateway4679693C"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPublicSubnet2SubnetF0D68CEE"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPublicSubnet2RouteTable2C07B956"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPublicSubnet2RouteTableAssociationB3F6657B"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPublicSubnet2DefaultRoute42780683"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPublicSubnet2EIP826FCFF6"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPublicSubnet2NATGatewayA4B958FF"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPrivateSubnet1SubnetDC97D6F3"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPrivateSubnet1RouteTableF6E78AAE"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPrivateSubnet1RouteTableAssociation957778D7"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPrivateSubnet1DefaultRoute88AE0523"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPrivateSubnet2Subnet14FFE644"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPrivateSubnet2RouteTable8FA2F0C1"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPrivateSubnet2RouteTableAssociationA8EE4531"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCPrivateSubnet2DefaultRoute9B9457DD"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCIGWEAA4C4AF"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCVPCGW7D38E901"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppVPC/RestrictDefaultSecurityGroupCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppVPCRestrictDefaultSecurityGroupCustomResource9D51B30E"
+          }
+        ],
+        "/WooCommerceStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+          }
+        ],
+        "/WooCommerceStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppDB/SubnetGroup/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppDBSubnetGroupF386CE7E"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppDB/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppDBSecurityGroup983175CD"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppDB/Secret/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppDBSecretA1CD689F"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppDB/Secret/Attachment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppDBSecretAttachment7FFD7C35"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppDB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppDB80AE6063"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppBackendASG/InstanceSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppBackendASGInstanceSecurityGroup15E85123"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppBackendASG/InstanceSecurityGroup/from WooCommerceStackThreeTierAppLBSecurityGroup1FCF5D1B:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppBackendASGInstanceSecurityGroupfromWooCommerceStackThreeTierAppLBSecurityGroup1FCF5D1B806F488EA4"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppBackendASG/InstanceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppBackendASGInstanceRole14111979"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppBackendASG/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppBackendASGInstanceProfileD30BF99F"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppBackendASG/LaunchTemplate/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppBackendASGLaunchTemplate2E98E27F"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppBackendASG/ASG": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppBackendASGE5544B27"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppBackendASG/ScalingPolicyCPUScaling/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppBackendASGScalingPolicyCPUScalingDEDB90F8"
+          }
+        ],
+        "/WooCommerceStack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--al2023-ami-kernel-6.1-x86_64:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppFrontendASG/InstanceSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppFrontendASGInstanceSecurityGroup210EEB0F"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppFrontendASG/InstanceSecurityGroup/from WooCommerceStackThreeTierAppLBSecurityGroup1FCF5D1B:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppFrontendASGInstanceSecurityGroupfromWooCommerceStackThreeTierAppLBSecurityGroup1FCF5D1B80AAE57024"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppFrontendASG/InstanceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppFrontendASGInstanceRole436C0523"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppFrontendASG/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppFrontendASGInstanceProfileE87D49DC"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppFrontendASG/LaunchTemplate/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppFrontendASGLaunchTemplate8063F9F8"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppFrontendASG/ASG": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppFrontendASGFBCCA853"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppFrontendASG/ScalingPolicyCPUScaling/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppFrontendASGScalingPolicyCPUScalingF65E6193"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppLB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppLBAB2037C9"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppLB/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppLBSecurityGroupDE3750E8"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppLB/SecurityGroup/to WooCommerceStackThreeTierAppFrontendASGInstanceSecurityGroup30A5BEEE:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppLBSecurityGrouptoWooCommerceStackThreeTierAppFrontendASGInstanceSecurityGroup30A5BEEE80B5897BB0"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppLB/SecurityGroup/to WooCommerceStackThreeTierAppBackendASGInstanceSecurityGroup84BB3241:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppLBSecurityGrouptoWooCommerceStackThreeTierAppBackendASGInstanceSecurityGroup84BB3241807AEE7A21"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppLB/FrontendListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppLBFrontendListenerC84D8BCC"
+          }
+        ],
+        "/WooCommerceStack/ThreeTierAppLB/BackendListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ThreeTierAppLBBackendListener69349C01"
+          }
+        ],
+        "/WooCommerceStack/BackendTargetGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BackendTargetGroupECF98930"
+          }
+        ],
+        "/WooCommerceStack/FrontendTargetGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FrontendTargetGroupED7B3E5D"
+          }
+        ],
+        "/WooCommerceStack/LoadBalancerDNS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LoadBalancerDNS"
+          }
+        ],
+        "/WooCommerceStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/WooCommerceStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/WooCommerceStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/WooCommerceStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "WooCommerceStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

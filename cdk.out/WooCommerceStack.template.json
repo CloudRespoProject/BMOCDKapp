@@ -1,0 +1,1628 @@
+{
+ "Resources": {
+  "ThreeTierAppVPCCC2AB901": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/Resource"
+   }
+  },
+  "ThreeTierAppVPCPublicSubnet1Subnet4F72BD37": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet1/Subnet"
+   }
+  },
+  "ThreeTierAppVPCPublicSubnet1RouteTable7F407FC9": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet1/RouteTable"
+   }
+  },
+  "ThreeTierAppVPCPublicSubnet1RouteTableAssociation5427CAF9": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ThreeTierAppVPCPublicSubnet1RouteTable7F407FC9"
+    },
+    "SubnetId": {
+     "Ref": "ThreeTierAppVPCPublicSubnet1Subnet4F72BD37"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "ThreeTierAppVPCPublicSubnet1DefaultRoute38D45F56": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "ThreeTierAppVPCIGWEAA4C4AF"
+    },
+    "RouteTableId": {
+     "Ref": "ThreeTierAppVPCPublicSubnet1RouteTable7F407FC9"
+    }
+   },
+   "DependsOn": [
+    "ThreeTierAppVPCVPCGW7D38E901"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "ThreeTierAppVPCPublicSubnet1EIP920D6FB0": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet1/EIP"
+   }
+  },
+  "ThreeTierAppVPCPublicSubnet1NATGateway4679693C": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "ThreeTierAppVPCPublicSubnet1EIP920D6FB0",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "ThreeTierAppVPCPublicSubnet1Subnet4F72BD37"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "ThreeTierAppVPCPublicSubnet1DefaultRoute38D45F56",
+    "ThreeTierAppVPCPublicSubnet1RouteTableAssociation5427CAF9"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet1/NATGateway"
+   }
+  },
+  "ThreeTierAppVPCPublicSubnet2SubnetF0D68CEE": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet2/Subnet"
+   }
+  },
+  "ThreeTierAppVPCPublicSubnet2RouteTable2C07B956": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet2/RouteTable"
+   }
+  },
+  "ThreeTierAppVPCPublicSubnet2RouteTableAssociationB3F6657B": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ThreeTierAppVPCPublicSubnet2RouteTable2C07B956"
+    },
+    "SubnetId": {
+     "Ref": "ThreeTierAppVPCPublicSubnet2SubnetF0D68CEE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "ThreeTierAppVPCPublicSubnet2DefaultRoute42780683": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "ThreeTierAppVPCIGWEAA4C4AF"
+    },
+    "RouteTableId": {
+     "Ref": "ThreeTierAppVPCPublicSubnet2RouteTable2C07B956"
+    }
+   },
+   "DependsOn": [
+    "ThreeTierAppVPCVPCGW7D38E901"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "ThreeTierAppVPCPublicSubnet2EIP826FCFF6": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet2/EIP"
+   }
+  },
+  "ThreeTierAppVPCPublicSubnet2NATGatewayA4B958FF": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "ThreeTierAppVPCPublicSubnet2EIP826FCFF6",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "ThreeTierAppVPCPublicSubnet2SubnetF0D68CEE"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "ThreeTierAppVPCPublicSubnet2DefaultRoute42780683",
+    "ThreeTierAppVPCPublicSubnet2RouteTableAssociationB3F6657B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PublicSubnet2/NATGateway"
+   }
+  },
+  "ThreeTierAppVPCPrivateSubnet1SubnetDC97D6F3": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PrivateSubnet1/Subnet"
+   }
+  },
+  "ThreeTierAppVPCPrivateSubnet1RouteTableF6E78AAE": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PrivateSubnet1/RouteTable"
+   }
+  },
+  "ThreeTierAppVPCPrivateSubnet1RouteTableAssociation957778D7": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ThreeTierAppVPCPrivateSubnet1RouteTableF6E78AAE"
+    },
+    "SubnetId": {
+     "Ref": "ThreeTierAppVPCPrivateSubnet1SubnetDC97D6F3"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "ThreeTierAppVPCPrivateSubnet1DefaultRoute88AE0523": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "ThreeTierAppVPCPublicSubnet1NATGateway4679693C"
+    },
+    "RouteTableId": {
+     "Ref": "ThreeTierAppVPCPrivateSubnet1RouteTableF6E78AAE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "ThreeTierAppVPCPrivateSubnet2Subnet14FFE644": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PrivateSubnet2/Subnet"
+   }
+  },
+  "ThreeTierAppVPCPrivateSubnet2RouteTable8FA2F0C1": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PrivateSubnet2/RouteTable"
+   }
+  },
+  "ThreeTierAppVPCPrivateSubnet2RouteTableAssociationA8EE4531": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ThreeTierAppVPCPrivateSubnet2RouteTable8FA2F0C1"
+    },
+    "SubnetId": {
+     "Ref": "ThreeTierAppVPCPrivateSubnet2Subnet14FFE644"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "ThreeTierAppVPCPrivateSubnet2DefaultRoute9B9457DD": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "ThreeTierAppVPCPublicSubnet2NATGatewayA4B958FF"
+    },
+    "RouteTableId": {
+     "Ref": "ThreeTierAppVPCPrivateSubnet2RouteTable8FA2F0C1"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "ThreeTierAppVPCIGWEAA4C4AF": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppVPC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/IGW"
+   }
+  },
+  "ThreeTierAppVPCVPCGW7D38E901": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "ThreeTierAppVPCIGWEAA4C4AF"
+    },
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/VPCGW"
+   }
+  },
+  "ThreeTierAppVPCRestrictDefaultSecurityGroupCustomResource9D51B30E": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+      "Arn"
+     ]
+    },
+    "DefaultSecurityGroupId": {
+     "Fn::GetAtt": [
+      "ThreeTierAppVPCCC2AB901",
+      "DefaultSecurityGroup"
+     ]
+    },
+    "Account": {
+     "Ref": "AWS::AccountId"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppVPC/RestrictDefaultSecurityGroupCustomResource/Default"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:",
+             {
+              "Ref": "AWS::Partition"
+             },
+             ":ec2:",
+             {
+              "Ref": "AWS::Region"
+             },
+             ":",
+             {
+              "Ref": "AWS::AccountId"
+             },
+             ":security-group/",
+             {
+              "Fn::GetAtt": [
+               "ThreeTierAppVPCCC2AB901",
+               "DefaultSecurityGroup"
+              ]
+             }
+            ]
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "dd5711540f04e06aa955d7f4862fc04e8cdea464cb590dae91ed2976bb78098e.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.dd5711540f04e06aa955d7f4862fc04e8cdea464cb590dae91ed2976bb78098e",
+    "aws:asset:property": "Code"
+   }
+  },
+  "ThreeTierAppDBSubnetGroupF386CE7E": {
+   "Type": "AWS::RDS::DBSubnetGroup",
+   "Properties": {
+    "DBSubnetGroupDescription": "Subnet group for ThreeTierAppDB database",
+    "SubnetIds": [
+     {
+      "Ref": "ThreeTierAppVPCPrivateSubnet1SubnetDC97D6F3"
+     },
+     {
+      "Ref": "ThreeTierAppVPCPrivateSubnet2Subnet14FFE644"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppDB/SubnetGroup/Default"
+   }
+  },
+  "ThreeTierAppDBSecurityGroup983175CD": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Security group for ThreeTierAppDB database",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppDB/SecurityGroup/Resource"
+   }
+  },
+  "ThreeTierAppDBSecretA1CD689F": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Generated by the CDK for stack: ",
+       {
+        "Ref": "AWS::StackName"
+       }
+      ]
+     ]
+    },
+    "GenerateSecretString": {
+     "ExcludeCharacters": " %+~`#$&*()|[]{}:;<>?!'/@\"\\",
+     "GenerateStringKey": "password",
+     "PasswordLength": 30,
+     "SecretStringTemplate": "{\"username\":\"admin\"}"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppDB/Secret/Resource"
+   }
+  },
+  "ThreeTierAppDBSecretAttachment7FFD7C35": {
+   "Type": "AWS::SecretsManager::SecretTargetAttachment",
+   "Properties": {
+    "SecretId": {
+     "Ref": "ThreeTierAppDBSecretA1CD689F"
+    },
+    "TargetId": {
+     "Ref": "ThreeTierAppDB80AE6063"
+    },
+    "TargetType": "AWS::RDS::DBInstance"
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppDB/Secret/Attachment/Resource"
+   }
+  },
+  "ThreeTierAppDB80AE6063": {
+   "Type": "AWS::RDS::DBInstance",
+   "Properties": {
+    "AllocatedStorage": "100",
+    "CopyTagsToSnapshot": true,
+    "DBInstanceClass": "db.t2.micro",
+    "DBSubnetGroupName": {
+     "Ref": "ThreeTierAppDBSubnetGroupF386CE7E"
+    },
+    "Engine": "mysql",
+    "EngineVersion": "8.0",
+    "MasterUserPassword": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "ThreeTierAppDBSecretA1CD689F"
+       },
+       ":SecretString:password::}}"
+      ]
+     ]
+    },
+    "MasterUsername": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "ThreeTierAppDBSecretA1CD689F"
+       },
+       ":SecretString:username::}}"
+      ]
+     ]
+    },
+    "StorageType": "gp2",
+    "VPCSecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "ThreeTierAppDBSecurityGroup983175CD",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Snapshot",
+   "DeletionPolicy": "Snapshot",
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppDB/Resource"
+   }
+  },
+  "ThreeTierAppBackendASGInstanceSecurityGroup15E85123": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "WooCommerceStack/ThreeTierAppBackendASG/InstanceSecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppBackendASG"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppBackendASG/InstanceSecurityGroup/Resource"
+   }
+  },
+  "ThreeTierAppBackendASGInstanceSecurityGroupfromWooCommerceStackThreeTierAppLBSecurityGroup1FCF5D1B806F488EA4": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "Load balancer to target",
+    "FromPort": 80,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "ThreeTierAppBackendASGInstanceSecurityGroup15E85123",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "ThreeTierAppLBSecurityGroupDE3750E8",
+      "GroupId"
+     ]
+    },
+    "ToPort": 80
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppBackendASG/InstanceSecurityGroup/from WooCommerceStackThreeTierAppLBSecurityGroup1FCF5D1B:80"
+   }
+  },
+  "ThreeTierAppBackendASGInstanceRole14111979": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppBackendASG"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppBackendASG/InstanceRole/Resource"
+   }
+  },
+  "ThreeTierAppBackendASGInstanceProfileD30BF99F": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "ThreeTierAppBackendASGInstanceRole14111979"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppBackendASG/InstanceProfile"
+   }
+  },
+  "ThreeTierAppBackendASGLaunchTemplate2E98E27F": {
+   "Type": "AWS::EC2::LaunchTemplate",
+   "Properties": {
+    "LaunchTemplateData": {
+     "IamInstanceProfile": {
+      "Arn": {
+       "Fn::GetAtt": [
+        "ThreeTierAppBackendASGInstanceProfileD30BF99F",
+        "Arn"
+       ]
+      }
+     },
+     "ImageId": {
+      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter"
+     },
+     "InstanceType": "t2.micro",
+     "Monitoring": {
+      "Enabled": false
+     },
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "ThreeTierAppBackendASGInstanceSecurityGroup15E85123",
+        "GroupId"
+       ]
+      }
+     ],
+     "TagSpecifications": [
+      {
+       "ResourceType": "instance",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "WooCommerceStack/ThreeTierAppBackendASG/LaunchTemplate"
+        }
+       ]
+      },
+      {
+       "ResourceType": "volume",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "WooCommerceStack/ThreeTierAppBackendASG/LaunchTemplate"
+        }
+       ]
+      }
+     ],
+     "UserData": {
+      "Fn::Base64": "#!/bin/bash"
+     }
+    },
+    "TagSpecifications": [
+     {
+      "ResourceType": "launch-template",
+      "Tags": [
+       {
+        "Key": "Name",
+        "Value": "WooCommerceStack/ThreeTierAppBackendASG/LaunchTemplate"
+       }
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "ThreeTierAppBackendASGInstanceRole14111979"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppBackendASG/LaunchTemplate/Resource"
+   }
+  },
+  "ThreeTierAppBackendASGE5544B27": {
+   "Type": "AWS::AutoScaling::AutoScalingGroup",
+   "Properties": {
+    "LaunchTemplate": {
+     "LaunchTemplateId": {
+      "Ref": "ThreeTierAppBackendASGLaunchTemplate2E98E27F"
+     },
+     "Version": {
+      "Fn::GetAtt": [
+       "ThreeTierAppBackendASGLaunchTemplate2E98E27F",
+       "LatestVersionNumber"
+      ]
+     }
+    },
+    "MaxSize": "4",
+    "MinSize": "2",
+    "Tags": [
+     {
+      "Key": "Name",
+      "PropagateAtLaunch": true,
+      "Value": "WooCommerceStack/ThreeTierAppBackendASG"
+     }
+    ],
+    "TargetGroupARNs": [
+     {
+      "Ref": "BackendTargetGroupECF98930"
+     }
+    ],
+    "VPCZoneIdentifier": [
+     {
+      "Ref": "ThreeTierAppVPCPrivateSubnet1SubnetDC97D6F3"
+     },
+     {
+      "Ref": "ThreeTierAppVPCPrivateSubnet2Subnet14FFE644"
+     }
+    ]
+   },
+   "UpdatePolicy": {
+    "AutoScalingScheduledAction": {
+     "IgnoreUnmodifiedGroupSizeProperties": true
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppBackendASG/ASG"
+   }
+  },
+  "ThreeTierAppBackendASGScalingPolicyCPUScalingDEDB90F8": {
+   "Type": "AWS::AutoScaling::ScalingPolicy",
+   "Properties": {
+    "AutoScalingGroupName": {
+     "Ref": "ThreeTierAppBackendASGE5544B27"
+    },
+    "PolicyType": "TargetTrackingScaling",
+    "TargetTrackingConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "ASGAverageCPUUtilization"
+     },
+     "TargetValue": 50
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppBackendASG/ScalingPolicyCPUScaling/Resource"
+   }
+  },
+  "ThreeTierAppFrontendASGInstanceSecurityGroup210EEB0F": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "WooCommerceStack/ThreeTierAppFrontendASG/InstanceSecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppFrontendASG"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppFrontendASG/InstanceSecurityGroup/Resource"
+   }
+  },
+  "ThreeTierAppFrontendASGInstanceSecurityGroupfromWooCommerceStackThreeTierAppLBSecurityGroup1FCF5D1B80AAE57024": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "Load balancer to target",
+    "FromPort": 80,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "ThreeTierAppFrontendASGInstanceSecurityGroup210EEB0F",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "ThreeTierAppLBSecurityGroupDE3750E8",
+      "GroupId"
+     ]
+    },
+    "ToPort": 80
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppFrontendASG/InstanceSecurityGroup/from WooCommerceStackThreeTierAppLBSecurityGroup1FCF5D1B:80"
+   }
+  },
+  "ThreeTierAppFrontendASGInstanceRole436C0523": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "WooCommerceStack/ThreeTierAppFrontendASG"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppFrontendASG/InstanceRole/Resource"
+   }
+  },
+  "ThreeTierAppFrontendASGInstanceProfileE87D49DC": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "ThreeTierAppFrontendASGInstanceRole436C0523"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppFrontendASG/InstanceProfile"
+   }
+  },
+  "ThreeTierAppFrontendASGLaunchTemplate8063F9F8": {
+   "Type": "AWS::EC2::LaunchTemplate",
+   "Properties": {
+    "LaunchTemplateData": {
+     "IamInstanceProfile": {
+      "Arn": {
+       "Fn::GetAtt": [
+        "ThreeTierAppFrontendASGInstanceProfileE87D49DC",
+        "Arn"
+       ]
+      }
+     },
+     "ImageId": {
+      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter"
+     },
+     "InstanceType": "t2.micro",
+     "Monitoring": {
+      "Enabled": false
+     },
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "ThreeTierAppFrontendASGInstanceSecurityGroup210EEB0F",
+        "GroupId"
+       ]
+      }
+     ],
+     "TagSpecifications": [
+      {
+       "ResourceType": "instance",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "WooCommerceStack/ThreeTierAppFrontendASG/LaunchTemplate"
+        }
+       ]
+      },
+      {
+       "ResourceType": "volume",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "WooCommerceStack/ThreeTierAppFrontendASG/LaunchTemplate"
+        }
+       ]
+      }
+     ],
+     "UserData": {
+      "Fn::Base64": "#!/bin/bash"
+     }
+    },
+    "TagSpecifications": [
+     {
+      "ResourceType": "launch-template",
+      "Tags": [
+       {
+        "Key": "Name",
+        "Value": "WooCommerceStack/ThreeTierAppFrontendASG/LaunchTemplate"
+       }
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "ThreeTierAppFrontendASGInstanceRole436C0523"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppFrontendASG/LaunchTemplate/Resource"
+   }
+  },
+  "ThreeTierAppFrontendASGFBCCA853": {
+   "Type": "AWS::AutoScaling::AutoScalingGroup",
+   "Properties": {
+    "LaunchTemplate": {
+     "LaunchTemplateId": {
+      "Ref": "ThreeTierAppFrontendASGLaunchTemplate8063F9F8"
+     },
+     "Version": {
+      "Fn::GetAtt": [
+       "ThreeTierAppFrontendASGLaunchTemplate8063F9F8",
+       "LatestVersionNumber"
+      ]
+     }
+    },
+    "MaxSize": "4",
+    "MinSize": "2",
+    "Tags": [
+     {
+      "Key": "Name",
+      "PropagateAtLaunch": true,
+      "Value": "WooCommerceStack/ThreeTierAppFrontendASG"
+     }
+    ],
+    "TargetGroupARNs": [
+     {
+      "Ref": "FrontendTargetGroupED7B3E5D"
+     }
+    ],
+    "VPCZoneIdentifier": [
+     {
+      "Ref": "ThreeTierAppVPCPrivateSubnet1SubnetDC97D6F3"
+     },
+     {
+      "Ref": "ThreeTierAppVPCPrivateSubnet2Subnet14FFE644"
+     }
+    ]
+   },
+   "UpdatePolicy": {
+    "AutoScalingScheduledAction": {
+     "IgnoreUnmodifiedGroupSizeProperties": true
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppFrontendASG/ASG"
+   }
+  },
+  "ThreeTierAppFrontendASGScalingPolicyCPUScalingF65E6193": {
+   "Type": "AWS::AutoScaling::ScalingPolicy",
+   "Properties": {
+    "AutoScalingGroupName": {
+     "Ref": "ThreeTierAppFrontendASGFBCCA853"
+    },
+    "PolicyType": "TargetTrackingScaling",
+    "TargetTrackingConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "ASGAverageCPUUtilization"
+     },
+     "TargetValue": 50
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppFrontendASG/ScalingPolicyCPUScaling/Resource"
+   }
+  },
+  "ThreeTierAppLBAB2037C9": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Scheme": "internet-facing",
+    "SecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "ThreeTierAppLBSecurityGroupDE3750E8",
+       "GroupId"
+      ]
+     }
+    ],
+    "Subnets": [
+     {
+      "Ref": "ThreeTierAppVPCPublicSubnet1Subnet4F72BD37"
+     },
+     {
+      "Ref": "ThreeTierAppVPCPublicSubnet2SubnetF0D68CEE"
+     }
+    ],
+    "Type": "application"
+   },
+   "DependsOn": [
+    "ThreeTierAppVPCPublicSubnet1DefaultRoute38D45F56",
+    "ThreeTierAppVPCPublicSubnet1RouteTableAssociation5427CAF9",
+    "ThreeTierAppVPCPublicSubnet2DefaultRoute42780683",
+    "ThreeTierAppVPCPublicSubnet2RouteTableAssociationB3F6657B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppLB/Resource"
+   }
+  },
+  "ThreeTierAppLBSecurityGroupDE3750E8": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatically created Security Group for ELB WooCommerceStackThreeTierAppLB467B19A3",
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow from anyone on port 80",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow from anyone on port 8080",
+      "FromPort": 8080,
+      "IpProtocol": "tcp",
+      "ToPort": 8080
+     }
+    ],
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppLB/SecurityGroup/Resource"
+   }
+  },
+  "ThreeTierAppLBSecurityGrouptoWooCommerceStackThreeTierAppFrontendASGInstanceSecurityGroup30A5BEEE80B5897BB0": {
+   "Type": "AWS::EC2::SecurityGroupEgress",
+   "Properties": {
+    "Description": "Load balancer to target",
+    "DestinationSecurityGroupId": {
+     "Fn::GetAtt": [
+      "ThreeTierAppFrontendASGInstanceSecurityGroup210EEB0F",
+      "GroupId"
+     ]
+    },
+    "FromPort": 80,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "ThreeTierAppLBSecurityGroupDE3750E8",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "ToPort": 80
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppLB/SecurityGroup/to WooCommerceStackThreeTierAppFrontendASGInstanceSecurityGroup30A5BEEE:80"
+   }
+  },
+  "ThreeTierAppLBSecurityGrouptoWooCommerceStackThreeTierAppBackendASGInstanceSecurityGroup84BB3241807AEE7A21": {
+   "Type": "AWS::EC2::SecurityGroupEgress",
+   "Properties": {
+    "Description": "Load balancer to target",
+    "DestinationSecurityGroupId": {
+     "Fn::GetAtt": [
+      "ThreeTierAppBackendASGInstanceSecurityGroup15E85123",
+      "GroupId"
+     ]
+    },
+    "FromPort": 80,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "ThreeTierAppLBSecurityGroupDE3750E8",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "ToPort": 80
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppLB/SecurityGroup/to WooCommerceStackThreeTierAppBackendASGInstanceSecurityGroup84BB3241:80"
+   }
+  },
+  "ThreeTierAppLBFrontendListenerC84D8BCC": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "FrontendTargetGroupED7B3E5D"
+      },
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "ThreeTierAppLBAB2037C9"
+    },
+    "Port": 80,
+    "Protocol": "HTTP"
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppLB/FrontendListener/Resource"
+   }
+  },
+  "ThreeTierAppLBBackendListener69349C01": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "BackendTargetGroupECF98930"
+      },
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "ThreeTierAppLBAB2037C9"
+    },
+    "Port": 8080,
+    "Protocol": "HTTP"
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/ThreeTierAppLB/BackendListener/Resource"
+   }
+  },
+  "BackendTargetGroupECF98930": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "Port": 80,
+    "Protocol": "HTTP",
+    "TargetGroupAttributes": [
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "TargetType": "instance",
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/BackendTargetGroup/Resource"
+   }
+  },
+  "FrontendTargetGroupED7B3E5D": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "Port": 80,
+    "Protocol": "HTTP",
+    "TargetGroupAttributes": [
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "TargetType": "instance",
+    "VpcId": {
+     "Ref": "ThreeTierAppVPCCC2AB901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/FrontendTargetGroup/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31Sy27jMAz8lt4VbZLLnvMoigBFa8RBrwtaZlw1MmWIVILC8L8vbCWOu8X2RM5wSA0lLfVi+VvPH+DCM1OeZs4Wus0FzEnBhf+0aJa6fWuM2hzpLduoLBbOmjwWhNJz92zvo+ABCod3/s6tmL2xINbTKO6Tx13WhxeQJxC8wKfKgj2D4H3wjgQD4ShITq5oJQLmvUYSlaOJwcrnU/CxGTz8SOyoCsisniGSeT9g3ThInr4zXxofh75OhZJ1uwWBAhh3xAJkUCXf45Hb9ZS4qXM0IS23Xd86O8UDyzUQVBh0mw7uhSkcIFQok41Hwb+VTkEUzwacpUq3qyg+T2A09o1LMw4BzMlSdS1l3lkzXPkXolMWat3ufXrsW7ytkgV/tA47hQ5YrHEeygIckLFUnZe6XTWNs2b4Dc8eyvVQwzBc/hRPdZYF6aq55ZN6sj+uN4Fdp/bIPgaDahNZfH2HR/pPKQv+bEsMa2BUK2aUXKCyVPU9GQSoUZKZ1yhNHN5i46m0vZdOkS9Rf/Cv83KuFws9f/hga2chktga9T7Fv/4JkW58AwAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "WooCommerceStack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Parameters": {
+  "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter": {
+   "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+   "Default": "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-x86_64"
+  },
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Outputs": {
+  "LoadBalancerDNS": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ThreeTierAppLBAB2037C9",
+     "DNSName"
+    ]
+   }
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-2"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
